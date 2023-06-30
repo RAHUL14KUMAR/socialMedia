@@ -62,7 +62,26 @@ const PostShare = () => {
   const handleUpload=async(e)=>{
     e.preventDefault();
 
-  
+      if(desc.current.value==null){
+        toast({
+          title:"please fill the description",
+          status:"warning",
+          duration:5000,
+          isClosable:true,
+          position:"top"
+        })
+        return
+      }
+      if(!pic){
+        toast({
+          title:"please select the pic",
+          status:"warning",
+          duration:5000,
+          isClosable:true,
+          position:"top"
+        })
+        return;
+      }
     const newPost = {
       userId: user._id,
       desc: desc.current.value,

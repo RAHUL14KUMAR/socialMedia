@@ -21,7 +21,7 @@ const FollowersCard = () => {
 
   return (
     <div className="col-sm-7 d-flex flex-column mt-4 mx-2">
-        <h5 style={{marginTop:8+'px',marginLeft:15+'px'}}>Who is following you</h5>
+        <h5 className='change'style={{marginTop:8+'px',marginLeft:15+'px'}}>Who is following you</h5>
 
         {persons. map((follower)=>{
             return(
