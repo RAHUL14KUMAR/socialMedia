@@ -35,3 +35,25 @@
     width: 80%;
     align-self: center;
 }
+@media only screen and (max-width:700px){
+    .icon{
+        display:block;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:orange;
+        width:1.5em;
+        height:1.2em;
+        color:white;
+        margin-left:5px;
+        cursor:pointer
+    }
+    .non-icon{
+        display:none
+    }
+} 
+@media only screen and (min-width:701px){
+    .icon{
+        display:none
+    }
+} 

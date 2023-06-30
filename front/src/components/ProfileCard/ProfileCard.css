@@ -3,8 +3,7 @@
     background:  rgba(255, 255, 255, 0.64);
 }
 
-.ProfileImages img
-{
+.ProfileImages img{
     width: 7rem;
     border-radius: 60%;
     position: absolute;
