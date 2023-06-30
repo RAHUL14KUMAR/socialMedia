@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
-import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
-import { UilLocationPoint } from "@iconscout/react-unicons";
+import { UilPen } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilTimes } from "@iconscout/react-unicons";
 import { useToast } from "@chakra-ui/react";
 import { useStateValue } from "../../StateProvider";
+import ProfileModal from "../ProfileModal/ProfileModal";
 import axios from 'axios';
 
 const PostShare = () => {
@@ -18,6 +18,7 @@ const PostShare = () => {
   const imageRef = useRef();
   const desc = useRef();
   const [pic,setPic]=useState();
+  const [modalOpened, setModalOpened] = useState(false);
 
   const postDetails=(pics)=>{
     if(pics===undefined){
@@ -100,14 +101,12 @@ const PostShare = () => {
     <div className="PostShare">
       <img
         src={
-          user.profilePicture
-            ? user.profilePicture
-            : {ProfileImage}
+          "https://th.bing.com/th/id/OIP.EgE1ozidMaJE7b_XPVkqNwHaHC?pid=ImgDet&rs=1"
         }
         alt="Profile"
       />
       <div>
-        <input type="text" placeholder="What's happening??" required ref={desc}/>
+        <input type="text" className='text' placeholder="share the post with description!!" required ref={desc}/>
         <div className="postOptions">
           <div className="option" style={{ color: "var(--photo)" }}
           onClick={()=>imageRef.current.click()}
@@ -119,13 +118,17 @@ const PostShare = () => {
             <UilPlayCircle />
             Video
           </div>{" "}
-          <div className="option" style={{ color: "var(--location)" }}>
-            <UilLocationPoint />
-            Location
+          <div className="option" style={{ color: "var(--location)" }} onClick={() => setModalOpened(true)}>
+            <UilPen />
+            updateMe
           </div>{" "}
           <div className="option" style={{ color: "var(--shedule)" }}>
             <UilSchedule />
             Shedule
+            <ProfileModal
+            modalOpened={modalOpened}
+            setModalOpened={setModalOpened}
+          />
           </div>
           <button className="button ps-button" onClick={handleUpload}>Share</button>
           <div style={{ display: "none" }}>

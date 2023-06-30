@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Navbar.css'
 import NavIcons from '../NavIcons/NavIcons'
 import TrendCard from '../TrendCard/TrendCard'
-import ShareModal from '../ShareModal/ShareModal'
-import {Box} from '@chakra-ui/react'
-function RightNavbar() {
+import { useDisclosure } from '@chakra-ui/react'; 
+import { Box, Drawer} from '@chakra-ui/react';
+import { DrawerBody, DrawerContent, DrawerOverlay} from "@chakra-ui/react";
+import { BsArrowBarLeft } from 'react-icons/bs';
 
-    const [modalOpened, setModalOpened] = useState(false);
+function RightNavbar() {
+    const {isOpen,onOpen,onClose}=useDisclosure();
   return (
     <Box className='col-sm-3 d-flex flex-column'>
+      <div variant='white' onClick={onOpen}className="mt-2">
+          <div className='icons'>
+          <BsArrowBarLeft/>
+          </div>
+      </div>
+      <Drawer placement='right' onClose={onClose} isOpen={isOpen}>
+      <DrawerOverlay/>
+      <DrawerContent>
+        <DrawerBody>
+          <NavIcons/>
+          <TrendCard/>
+        </DrawerBody>
+      </DrawerContent>
+      </Drawer>
+      <div className="non-icons">
       <NavIcons/>
       <TrendCard/>
-      <button className="button r-button" onClick={() => setModalOpened(true)}>
-        Share
-      </button>
-      <ShareModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
+      </div>
     </Box>
   )
 }

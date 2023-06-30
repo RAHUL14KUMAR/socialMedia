@@ -46,14 +46,43 @@
         height:1.2em;
         color:white;
         margin-left:5px;
-        cursor:pointer
+        cursor:pointer;
+        border:2px solid red;
+        position:relative;
+        top:.5em;
+        left:10em
     }
     .non-icon{
         display:none
     }
 } 
-@media only screen and (min-width:701px){
+@media only screen and (min-width:822px){
     .icon{
+        display:none
+    }
+} 
+@media only screen and (max-width:821px){
+    .icons{
+        display:block;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:orange;
+        width:1.5em;
+        height:1.2em;
+        color:white;
+        margin-left:5px;
+        cursor:pointer;
+        position:relative;
+        top:3em;
+        border:2px solid red;
+    }
+    .non-icons{
+        display:none
+    }
+}
+@media only screen and (min-width:822px){
+    .icons{
         display:none
     }
 } 
