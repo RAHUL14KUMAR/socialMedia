@@ -6,6 +6,8 @@ const dotenv=require("dotenv");
 const AuthRoute=require("./Routes/AuthRoutes");
 const userRouter=require("./Routes/userRoute");
 const postRouter=require('./Routes/PostRoutes');
+const ChatRouter=require('./Routes/ChatRoutes');
+const MessageRouter=require('./Routes/MessageRoutes');
 
 dotenv.config();
 const port=process.env.PORT;
@@ -20,6 +22,8 @@ app.use(bodyParser.json());
 app.use('/auth',AuthRoute);
 app.use('/user',userRouter);
 app.use('/post',postRouter);
+app.use('/chat',ChatRouter);
+app.use('/message', MessageRouter);
 
 connect;
 app.listen(port,()=>{
