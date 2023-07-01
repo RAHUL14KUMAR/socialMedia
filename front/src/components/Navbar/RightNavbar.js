@@ -10,7 +10,7 @@ import { BsArrowBarLeft } from 'react-icons/bs';
 function RightNavbar() {
     const {isOpen,onOpen,onClose}=useDisclosure();
   return (
-    <Box className='col-sm-3 d-flex flex-column'>
+    <Box className='col-sm-12 d-flex flex-column'>
       <div variant='white' onClick={onOpen}className="mt-2">
           <div className='icons'>
           <BsArrowBarLeft/>
@@ -21,7 +21,9 @@ function RightNavbar() {
       <DrawerContent>
         <DrawerBody>
           <NavIcons/>
+          <Box>
           <TrendCard/>
+          </Box>
         </DrawerBody>
       </DrawerContent>
       </Drawer>

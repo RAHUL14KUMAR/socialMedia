@@ -5,9 +5,13 @@ import RightNavbar from './RightNavbar'
 function Navbar() {
   return (
     <div className='d-flex justify-content-space-between'>
-        <Left/>
+      <div className="col-lg-3 ">
+      <Left/>
+      </div>
         <Middle/>
-        <RightNavbar/>
+        <div className="col-lg-3 ">
+          <RightNavbar/>
+        </div>
     </div>
   )
 }

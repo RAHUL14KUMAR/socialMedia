@@ -2,7 +2,9 @@
     display: flex;
     gap: 0.75rem;
 }
-
+.size{
+    width:65px;
+}
 .Search{
     display: flex;
     background-color: var(--inputColor);
@@ -50,7 +52,7 @@
         border:2px solid red;
         position:relative;
         top:.5em;
-        left:10em
+        left:1em
     }
     .non-icon{
         display:none
@@ -80,9 +82,11 @@
     .non-icons{
         display:none
     }
+
 }
 @media only screen and (min-width:822px){
     .icons{
         display:none
     }
+    
 } 

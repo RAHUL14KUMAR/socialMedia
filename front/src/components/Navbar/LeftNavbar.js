@@ -11,34 +11,29 @@ function LeftNavbar() {
   const {isOpen,onOpen,onClose}=useDisclosure();
 
   return (
-    
-    <div className='col-sm-3'>
-        <SideDrawer/>
-        <div variant='white' onClick={onOpen}className="mt-2">
-          <div className='icon'>
-          <BsArrowBarRight/>
+  
+      <div className='col-sm-12'>
+          <SideDrawer/>
+          <div variant='white' onClick={onOpen}className="mt-2">
+            <div className='icon'>
+            <BsArrowBarRight/>
+            </div>
           </div>
-        </div>
-        <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
-          <DrawerOverlay/>
-          <DrawerContent>
-            <DrawerBody>
-              <Box>
-              <ProfileCard/>
-              </Box>
-            </DrawerBody>
-            <DrawerBody>
-              <Box>
-              <FollowersCard/>
-              </Box>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
-        <div className="non-icon">
-          <ProfileCard/>
-          <FollowersCard/>
-        </div>
-    </div>
+          <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay/>
+            <DrawerContent>
+              <DrawerBody>
+                <ProfileCard/>
+                <FollowersCard/> 
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+          <div className="non-icon">
+            <ProfileCard/>
+            <FollowersCard/>
+          </div>
+      </div>
+
   )
 }
 
