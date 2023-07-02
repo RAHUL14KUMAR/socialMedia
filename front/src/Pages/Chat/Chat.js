@@ -2,8 +2,10 @@ import React,{useState,useEffect} from 'react'
 import './Chat.css'
 import NavIcons from "../../components/NavIcons/NavIcons";
 import ChatBox from "../../components/ChatBox/ChatBox";
+import Conversation from '../../components/Conversation/Conversation'
 import { useStateValue } from '../../StateProvider';
 import axios from 'axios';
+import SideDrawer from '../../components/sideDrawer/SideDrawer';
 
 function Chat() {
     const [{user},dispatch]=useStateValue();
@@ -18,7 +20,8 @@ function Chat() {
         const getChats=async()=>{
             try{
                 const {data}=await axios.get(`http://localhost:5000/chat/${user._id}`);
-                setChats(data)
+                setChats(data);
+                console.log(data);
             }catch(error){
                 console.log(error);
             }
@@ -28,11 +31,11 @@ function Chat() {
   return (
     <div className='Chat'>
         <div className="Left-side-chat">
-        {/* <LogoSearch /> */}
+            <SideDrawer/>
             <div className="Chat-container">
                 <h2>Chats</h2>
                 <div className="Chat-list">
-                    {/* {chats.map((chat) => (
+                    {chats.map((chat) => (
                     <div
                         onClick={() => {
                         setCurrentChat(chat);
@@ -41,10 +44,11 @@ function Chat() {
                         <Conversation
                         data={chat}
                         currentUser={user._id}
-                        online={checkOnlineStatus(chat)}
+                        // online={checkOnlineStatus(chat)}
                         />
                     </div>
-                    ))} */}
+                    ))}
+                    
                 </div>
             </div>
         </div>
@@ -55,7 +59,7 @@ function Chat() {
             <ChatBox
             chat={currentChat}
             currentUser={user._id}
-            setSendMessage={setSendMessage}
+            // setSendMessage={setSendMessage}
             receivedMessage={receivedMessage}
             />
         </div>

@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    
   }
   
   .Chat-container {
@@ -21,18 +22,21 @@
     height: auto;
     min-height: 80vh;
     overflow: scroll;
+    border:5px solid rgba(93, 93, 93, 0.464)
   }
   
   .Chat-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    
   }
   
   .Right-side-chat {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    border:7px solid rgba(93, 93, 93, 0.464)
   }
   .conversation:hover {
     background: #80808038;
