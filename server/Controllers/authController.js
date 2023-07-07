@@ -8,7 +8,7 @@ const dotenv=require("dotenv");
 
 dotenv.config();
 const registerUser=asyncHandler(async(req,res)=>{
-    const {username,password,firstname,lastname}=req.body;
+    const {username,password,firstname,lastname,profilePicture,about,livesin,worksAt,relationship}=req.body;
     try{
     const userExist=await UserModel.findOne({username:username});
     if(userExist){
@@ -21,7 +21,9 @@ const registerUser=asyncHandler(async(req,res)=>{
         username,
         password:hashPass,
         firstname,
-        lastname
+        lastname,
+        profilePicture,
+        about,livesin,worksAt,relationship
     })
     
         const user =await newUser.save();
