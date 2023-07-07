@@ -11,14 +11,61 @@ function Signup() {
     const [username,setUserName]=useState("");
     const [password,setPassword]=useState("");
     const [confirmpassword,setConfirmpassword]=useState("");
+    const [about,setAbout]=useState("");
+    const [livesin,setLives]=useState("");
+    const [worksAt,setWork]=useState("");
+    const [relationship,setRelation]=useState("");
+    const [profilePicture,setProfilePicture]=useState();
 
     const [show,setShow]=useState(false);
 
     const handler=()=>{
         setShow(!show);
     }
+
+    const postDetails=(pics)=>{
+      if(pics===undefined){
+        toast({
+            title:"please select an image",
+            status:"warning",
+            duration:5000,
+            isClosable:true,
+            position:"top"
+        })
+        return;
+      }
+      if(pics.type==='image/jpeg'||pics.type==='image/png'){
+        const data=new FormData();
+        data.append("file",pics);
+        data.append("upload_preset","chat-app");
+        data.append("cloud_name","dxdctwwyf");
+        fetch("https://api.cloudinary.com/v1_1/dxdctwwyf/image/upload",{
+            method:'post',
+            body:data
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            setProfilePicture(data.url.toString());
+            console.log(""+data.url);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+      }else{
+          toast({
+              title:"please select an image",
+              status:"warning",
+              duration:5000,
+              isClosable:true,
+              position:"top"
+          })
+          return;
+      }
+  
+    }
+
     const submitHandler=async()=>{
-        if(!password||!firstname||!lastname||!username||!confirmpassword){
+        if(!password||!firstname||!lastname||!username||!confirmpassword||!profilePicture||!about||!livesin||!relationship||!worksAt){
             toast({
                 title: "Please Fill all the Feilds",
                 status: "warning",
@@ -45,7 +92,7 @@ function Signup() {
                 }
             }
             const {data}=await axios.post(
-                `http://localhost:5000/auth/register`,{username,password,firstname,lastname},options)
+                `http://localhost:5000/auth/register`,{username,password,firstname,lastname,profilePicture,about,livesin,worksAt,relationship},options)
                 toast({
                     title:"registeration successfull",
                     status:"success",
@@ -81,7 +128,7 @@ function Signup() {
         </FormControl>
         <FormControl id='lastname' style={{margin:4+'px'}} isRequired>
         <FormLabel>
-            LastNAME
+            LASTNAME
         </FormLabel>
         <Input
             placeholder='lastname call'
@@ -135,6 +182,49 @@ function Signup() {
           </InputRightElement>
         </InputGroup>
       </FormControl>
+      <FormControl>
+        <FormLabel>
+          Profile image
+        </FormLabel>
+        <Input type="file" name="profileImage" accept='image/*'
+              onChange={(e)=>postDetails(e.target.files[0])}/>
+      </FormControl>
+
+      <FormControl id='about' isRequired className='d-flex'>
+        <FormLabel>
+            ABOUT
+        </FormLabel>
+        <Input
+            value={about}
+            onChange={(e)=>setAbout(e.target.value)}
+        />
+        <FormLabel>
+            LIVESIN
+        </FormLabel>
+        <Input
+            value={livesin}
+            onChange={(e)=>setLives(e.target.value)}
+        />
+      </FormControl>
+
+      <FormControl id='about' isRequired className='d-flex'>
+        <FormLabel>
+            WORKS AT
+        </FormLabel>
+        <Input
+            value={worksAt}
+            onChange={(e)=>setWork(e.target.value)}
+        />
+        <FormLabel>
+            RELATIONSHIP
+        </FormLabel>
+        <Input
+            value={relationship}
+            onChange={(e)=>setRelation(e.target.value)}
+        />
+      </FormControl>
+
+
       <Button
         colorScheme="orange"
         width="100%"

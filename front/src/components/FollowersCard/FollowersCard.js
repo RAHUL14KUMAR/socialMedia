@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import './FollowersCard.css'
-import { Followers } from '../../Data/FollowersData'
+
 import { useStateValue } from '../../StateProvider'
 import axios from 'axios';
 import FollowersModal from './FollowersModal';
