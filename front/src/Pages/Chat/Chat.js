@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
 import './Chat.css'
 import NavIcons from "../../components/NavIcons/NavIcons";
 import ChatBox from "../../components/ChatBox/ChatBox";
@@ -6,15 +6,43 @@ import Conversation from '../../components/Conversation/Conversation'
 import { useStateValue } from '../../StateProvider';
 import axios from 'axios';
 import SideDrawer from '../../components/sideDrawer/SideDrawer';
+import {io} from 'socket.io-client'
 
 function Chat() {
     const [{user},dispatch]=useStateValue();
 
-
+    const [onlineUsers, setOnlineUsers] = useState([]);
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [sendMessage, setSendMessage] = useState(null);
     const [receivedMessage, setReceivedMessage] = useState(null);
+
+    const socket=useRef()
+
+    useEffect(()=>{
+        socket.current = io("http://localhost:8080");
+        socket.current.emit("new-user-add", user._id);
+        socket.current.on("get-users", (users) => {
+            setOnlineUsers(users);
+        },[user]);
+    })
+
+    // Send Message to socket server
+    useEffect(() => {
+        if (sendMessage!==null) {
+        socket.current.emit("send-message", sendMessage);}
+    }, [sendMessage]);
+
+
+    // Get the message from socket server
+    useEffect(() => {
+        socket.current.on("recieve-message", (data) => {
+        console.log(data)
+        setReceivedMessage(data);
+        }
+
+        );
+    }, []);
 
     useEffect(()=>{
         const getChats=async()=>{
@@ -28,6 +56,12 @@ function Chat() {
         }
         getChats();
     },[user._id])
+
+    const checkOnlineStatus = (chat) => {
+        const chatMember = chat.members.find((member) => member !== user._id);
+        const online = onlineUsers.find((user) => user.userId === chatMember);
+        return online ? true : false;
+    };
   return (
     <div className='Chat'>
         <div className="Left-side-chat">
@@ -44,7 +78,7 @@ function Chat() {
                         <Conversation
                         data={chat}
                         currentUser={user._id}
-                        // online={checkOnlineStatus(chat)}
+                        online={checkOnlineStatus(chat)}
                         />
                     </div>
                     ))}
@@ -59,7 +93,7 @@ function Chat() {
             <ChatBox
             chat={currentChat}
             currentUser={user._id}
-            // setSendMessage={setSendMessage}
+            setSendMessage={setSendMessage}
             receivedMessage={receivedMessage}
             />
         </div>

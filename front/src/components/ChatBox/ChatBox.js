@@ -4,7 +4,7 @@ import "./ChatBox.css";
 import { format } from "timeago.js";
 import InputEmoji from 'react-input-emoji'
 
-function ChatBox({ chat, currentUserId,  receivedMessage }) {
+function ChatBox({ chat, currentUserId,setSendMessage,  receivedMessage }) {
 
     const scroll = useRef();
     const imageRef = useRef();
@@ -13,8 +13,8 @@ function ChatBox({ chat, currentUserId,  receivedMessage }) {
     const [newMessage, setNewMessage] = useState("");
 
     const handleChange = (newMessage)=> {
-      // e.preventDefault();
-        setNewMessage(newMessage)
+
+      setNewMessage(newMessage)
     }
     console.log(newMessage);
 
@@ -62,10 +62,11 @@ function ChatBox({ chat, currentUserId,  receivedMessage }) {
             text:newMessage,
             chatId:chat._id
         }
+        console.log(message);
         const receiverId=chat.members.find((id)=>id!==currentUserId);
-        // setSendMessage({...message, receiverId})
+        setSendMessage({...message, receiverId})
         try{
-            const {data}=await axios.post(`http://localhost:5000/chat`,{message});
+            const {data}=await axios.post(`http://localhost:5000/message`,{message});
             setMessages([...messages, data]);
             setNewMessage("");
         }catch(error){
