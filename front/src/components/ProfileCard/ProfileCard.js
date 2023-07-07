@@ -13,12 +13,12 @@ function ProfileCard() {
         <div className='d-flex flex-column align-items-center justify-content-center position-relative'>
             <img className="rounded-4"src={Cover} alt='coverImage' style={{width:"80%",height:10+'em'}}/>
             <div className="ProfileImages">
-                <img src={Post}/>
+                <img src={user.profilePicture}/>
             </div>
         </div> 
         <div className="ProfileName">
-            <span style={{fontWeight:"bold"}}>firstname lastname</span>
-            <span> 'Write about yourself'</span>
+            <span style={{fontWeight:"bold"}}>{user.firstname} {user.lastname}</span>
+            <span> {user.about}</span>
       </div>
       <div className="followStatus">
         <hr className='hr'/>
@@ -29,7 +29,7 @@ function ProfileCard() {
             </div>
             <div className='vl'> </div>
             <div className="follow">
-                <span>{user.followers.length}</span>
+                <span>{user.following.length}</span>
                 <span>Following</span>
             </div>
         </div>
