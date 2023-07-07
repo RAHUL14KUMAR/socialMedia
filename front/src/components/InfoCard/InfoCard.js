@@ -1,10 +1,17 @@
 
 import React from "react";
+import {useNavigate} from'react-router-dom'
 import "./InfoCard.css";
 import { useStateValue } from "../../StateProvider";
 
 const InfoCard = () => {
+  const navigate=useNavigate();
   const [{user},dispatch]=useStateValue();
+
+  const logout=()=>{
+    localStorage.removeItem("user");
+    navigate('/');
+  }
   return (
     <div className="InfoCard">
       <div className="infoHead">
@@ -14,26 +21,26 @@ const InfoCard = () => {
 
       <div className="info">
         <span>
-          <b>Status </b>
+          <b>Relationship Status </b>
         </span>
-        <span>in Relationship</span>
+        <span>{user.relationship}</span>
       </div>
 
       <div className="info">
         <span>
           <b>Lives in </b>
         </span>
-        <span></span>
+        <span>{user.livesin}</span>
       </div>
 
       <div className="info">
         <span>
           <b>Works at </b>
         </span>
-        <span>devlovers</span>
+        <span>{user.worksAt}</span>
       </div>
 
-      <button className="button logout-button">Logout</button>
+      <button className="button logout-button" onClick={logout}>Logout</button>
     </div>
   );
 };

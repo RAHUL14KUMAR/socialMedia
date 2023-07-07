@@ -1,11 +1,12 @@
 import React from 'react'
 import "./ProfileCard.css"
 import Cover from '../../img/cover.jpg'
-import Post from '../../img/postpic1.jpg'
+
 import { useStateValue } from '../../StateProvider'
 function ProfileCard() {
 
     const [{user},dispatch]=useStateValue();
+
 
   return (
     <div className='mt-2 col-sm-9' style={{bordeRadius: 1.5+'rem',
